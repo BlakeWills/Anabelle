@@ -27,24 +27,15 @@ To use SSH authentication with Ansible, you can supply a new key pair in the for
 
 Place both files in the same directory as Dockerfile.
 
-
 #### Building the container:
 
-```    
-sudo docker build -t depsvr:latest \
-    --build-arg SERVER_URL=[AzureDevOpsOrgUrl] \
-    --build-arg PAT=[PersonalAccessToken] \
-    --build-arg AGENT_NAME=[AgentName] \
-    --build-arg AGENT_DIR=usr/local/agent_work
-    --build-arg AZURE_SUB_ID=[SubscriptionId] \
-    --build-arg AZURE_CLIENT_ID=[ClientId] \
-    --build-arg AZURE_SECRET=[Secret] \
-    --build-arg AZURE_TENANT=[Tenant] .
-```
+`sudo docker build -t anabelle:latest`
 
 #### Running the container
 
+Before running the container, create a copy of the env.vars file called env.vars.mine and fill in your azure details.
 
+`sudo docker run --env-file env.vars.mine anabelle:latest`
 
 ## Azure Container Registry
 
