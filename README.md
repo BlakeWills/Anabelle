@@ -1,5 +1,18 @@
 # Anabelle
-Azure Provisioning Server using Docker, Terraform and Ansible, for use with Azure DevOps.
+Azure Provisioning Server using Docker, Terraform and Ansible, for use with Azure DevOps pipelines.
+
+This server (container) allows you to provision resources using Terraform and configure them using Ansible.
+As an added bonus, we've integrated Azure Dynamic inventory.
+
+## Usage
+
+Usage is fairly straight forward.
+
+ 1. Spin up an instance of the container that Azure DevOps can see.
+ 2. Create your Terraform / Ansible tasks as bash commands within a release pipeline.
+ 3. Ensure your release runs on your agent. ("Run on Agent")
+
+ // TODO: Make this better.  
 
 ## Building
 
