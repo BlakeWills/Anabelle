@@ -68,26 +68,6 @@ Finally, push the image to to registry:
 
 #### Running the container from Azure Registry:
 
-```
-export RES_GROUP=[ResourceGroupName]
-export ACR_LOGIN_SERVER=[AcrLoginServer]
-export ACR_NAME=[AcrName]
-export AKV_NAME=[AzureKeyVaultName]
-
-az container create \
-    --name [containerName] \
-    --resource-group $RES_GROUP \
-    --image $ACR_LOGIN_SERVER/depsvr:latest \
-    --registry-login-server $ACR_LOGIN_SERVER \
-    --registry-username $(az keyvault secret show --vault-name $AKV_NAME -n $ACR_NAME-pull-usr --query value -o tsv) \
-    --registry-password $(az keyvault secret show --vault-name $AKV_NAME -n $ACR_NAME-pull-pwd --query value -o tsv) \
-    --dns-name-label aci-demo-$RANDOM \
-    --query ipAddress.fqdn
-```
-
-
-
-ENV AZURE_SUBSCRIPTION_ID
-ENV AZURE_CLIENT_ID
-ENV AZURE_SECRET=${AZURE_SECRET}
-ENV AZURE_TENANT=${AZURE_TENANT}
+1. Replace the variable placeholders within the `createContainer.sh` script with the correct values.
+2. Login to your Azure Container Registry: `az acr login --name [acr_name]`
+3. Run the script
