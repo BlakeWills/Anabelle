@@ -9,9 +9,11 @@ IMAGE_NAME='anabelle'
 SERVER_URL=https://dev.azure.com/[YourOrganisation]
 PAT='[PAT]'
 POOL='default'
-AGENT_NAME='anabelle01'
+AGENT_NAME='anabelle'
 AGENT_DIR='usr/local/agent_work'
-AZURE_SUBSCRIPTION_ID='[AZURE_SSUBSCRIPTION_ID]'
+
+## Optional - Can be overriden during pipeline execution.
+AZURE_SUBSCRIPTION_ID='[AZURE_SUBSCRIPTION_ID]'
 AZURE_CLIENT_ID='[AZURE_CLIENT_ID]'
 AZURE_SECRET='[AZURE_SECRET]'
 AZURE_TENANT='[AZURE_TENANT]'

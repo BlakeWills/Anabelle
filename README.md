@@ -94,4 +94,4 @@ On your local machine:
 
 1. Replace the variable placeholders within the `createContainer.sh` script with the correct values.
 2. Login to your Azure Container Registry: `az acr login --name [acr_name]`
-3. Run the script
+3. Run `createContainer.sh`
