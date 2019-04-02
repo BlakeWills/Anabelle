@@ -4,15 +4,16 @@ Azure Provisioning Server using Docker, Terraform and Ansible, for use with Azur
 This server (container) allows you to provision resources using Terraform and configure them using Ansible.
 As an added bonus, we've integrated Azure Dynamic inventory.
 
+The primary motivation for this project was to be able seamlessly integrate Terraform and Ansible within a CI/CD pipeline, using dynamic inventory.
+
 ## Usage
 
-Usage is fairly straight forward.
+Usage is pretty straight forward:
 
- 1. Spin up an instance of the container that Azure DevOps can see.
- 2. Create your Terraform / Ansible tasks as bash commands within a release pipeline.
- 3. Ensure your release runs on your agent. ("Run on Agent")
-
- // TODO: Make this better.  
+ 1. Build the image
+ 2. Spin up an instance of the container that can connect to Azure DevOps.
+ 3. Create your Terraform / Ansible tasks as bash commands within a release pipeline.
+ 4. Ensure your pipeline runs on the correct agent. ("Run on Agent")
 
 ## Building
 
@@ -23,22 +24,27 @@ Usage is fairly straight forward.
 - Ansible Inventory Plugin for Azure
 - Python & Pip
 
-### TLDR:
-
- - Create an Azure Service Principal to authenticate with Azure.
- - Generate a PAT within Azure DevOps for the agent.
- - Build the image
-
-#### Create a Service Principal
-`az ad sp create-for-rbac --name ServicePrincipalName`
-
-Take note of the app Id, tenant Id and password.
-
-#### Building the container:
+The image can be built with a clean `docker build` command, without having to specify any configuration:
 
 `sudo docker build -t anabelle:latest`
 
+## Authentication
+
+Terraform and Ansible Azure Dynamic Inventory plugin authenticate with Azure using an Azure Service Principle.
+
+The following command can be used to create a new service principle:
+
+`az ad sp create-for-rbac --name ServicePrincipalName`
+
+app Id (client Id), tenant Id and password (secret) will need to be passed to the container as environment varaibles.
+
+The Azure DevOps agent authenticates using a personal access token (PAT), which can be generated within the DevOps portal.
+
 ## Configuration
+
+This provisioning container requires a number of environment variables that can be specified at startup (`docker run`) or runtime (during pipeline execution).
+
+Environment variables for the Azure DevOps agent must be supplied at startup.
 
 | Variable Name  | Required By | Description  | Startup  | Runtime  |
 |---|---|---|---|---|
@@ -82,8 +88,9 @@ Finally, push the image to to registry:
 
 `docker push [acrLoginUri]/anabelle:latest`
 
-
 #### Running the container from Azure Registry:
+
+On your local machine:
 
 1. Replace the variable placeholders within the `createContainer.sh` script with the correct values.
 2. Login to your Azure Container Registry: `az acr login --name [acr_name]`
