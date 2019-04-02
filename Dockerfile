@@ -8,10 +8,6 @@ COPY vsts-agent-linux-x64-2.148.1.tar.gz /agent
 RUN adduser agentusr \
     && yum install -y unzip
 
-# Copy SSH Keys
-COPY id_rsa /home/agentusr/.ssh/
-COPY id_rsa.pub /home/agentusr/.ssh/
-
 # Install terraform
 RUN pushd /tmp \
     && curl https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip -o terraform.zip \

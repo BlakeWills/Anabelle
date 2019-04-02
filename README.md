@@ -25,7 +25,6 @@ Usage is fairly straight forward.
 
 ### TLDR:
 
- - Generate a new SSH key pair for Ansible authentication on your new machines.
  - Create an Azure Service Principal to authenticate with Azure.
  - Generate a PAT within Azure DevOps for the agent.
  - Build the image
@@ -35,35 +34,33 @@ Usage is fairly straight forward.
 
 Take note of the app Id, tenant Id and password.
 
-#### Generating a new SSH key for the server:
-To use SSH authentication with Ansible, you can supply a new key pair in the form of `id_rsa` and `id_rsa.pub` files. Use `ssh-keygen` to generate the new keys.
-
-Place both files in the same directory as Dockerfile.
-
 #### Building the container:
 
 `sudo docker build -t anabelle:latest`
 
-#### Running the container
+## Deployment - Local
 
 Before running the container, create a copy of the env.vars file called env.vars.mine and fill in your azure details.
 
 `sudo docker run --env-file env.vars.mine anabelle:latest`
 
-## Azure Container Registry
+## Deployment - Azure
 
-#### Pushing the container to Azure Container Registry:
-First, login to your azure container registry:
+We recommend pushing the built image to an Azure Container Registry and deploying via an Azure Container Instance.
+
+### Pushing the image to Azure Container Registry
+
+First, login to your azure container registry from the command line:
 
 `az acr login --name [acrName]`
 
 Next, tag the image with your registry url:
 
-`docker tag depsvr [acrLoginUri]/depsvr`
+`docker tag anabelle [acrLoginUri]/anabelle:latest`
 
 Finally, push the image to to registry:
 
-`docker push [acrLoginUri]/depsvr`
+`docker push [acrLoginUri]/anabelle:latest`
 
 
 #### Running the container from Azure Registry:
