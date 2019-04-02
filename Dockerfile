@@ -4,9 +4,9 @@ WORKDIR /agent
 
 COPY vsts-agent-linux-x64-2.148.1.tar.gz /agent
 
-# Create user that will run the agent and install unzip.
+# Create user that will run the agent and install unzip + openssh.
 RUN adduser agentusr \
-    && yum install -y unzip
+    && yum install -y unzip openssh-clients
 
 # Install terraform
 RUN pushd /tmp \

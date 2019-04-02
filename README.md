@@ -40,6 +40,15 @@ app Id (client Id), tenant Id and password (secret) will need to be passed to th
 
 The Azure DevOps agent authenticates using a personal access token (PAT), which can be generated within the DevOps portal.
 
+#### Ansible Authentication
+
+Due to the limitations (see https://hub.docker.com/_/centos/#systemd-integration) imposed on running systemd and therefore also starting the SSH daemon within a container, Anabelle relies on password based authentication.
+
+The server password must be specified within an ansible-vault encrypted file. 
+
+1. Create an encrypt the password file on your local machine using ansible-vault.
+2. Add a task to your pipeline that recreates the file on the agent and exports an environment variable containing the vault file password.
+
 ## Configuration
 
 This provisioning container requires a number of environment variables that can be specified at startup (`docker run`) or runtime (during pipeline execution).
