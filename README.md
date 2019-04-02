@@ -70,11 +70,11 @@ Before running the container, create a copy of the env.vars file called env.vars
 
 `sudo docker run --env-file env.vars.mine anabelle:latest`
 
-### Azure Deployment
+## Azure Deployment
 
 We recommend pushing the built image to an Azure Container Registry and deploying via an Azure Container Instance.
 
-#### Pushing the image to Azure Container Registry
+### Pushing the image to Azure Container Registry
 
 First, login to your azure container registry from the command line:
 
@@ -88,7 +88,7 @@ Finally, push the image to to registry:
 
 `docker push [acrLoginUri]/anabelle:latest`
 
-#### Running the container from Azure Registry:
+### Running the container from Azure Registry:
 
 On your local machine:
 
