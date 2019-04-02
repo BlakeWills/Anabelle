@@ -63,7 +63,7 @@ Finally, push the image to to registry:
 `docker push [acrLoginUri]/anabelle:latest`
 
 
-#### Running the container from Azure Registry:
+### Running the container from Azure Registry:
 
 1. Replace the variable placeholders within the `createContainer.sh` script with the correct values.
 2. Login to your Azure Container Registry: `az acr login --name [acr_name]`
