@@ -44,10 +44,7 @@ The Azure DevOps agent authenticates using a personal access token (PAT), which 
 
 Due to the limitations (see https://hub.docker.com/_/centos/#systemd-integration) imposed on running systemd and therefore also starting the SSH daemon within a container, Anabelle relies on password based authentication.
 
-The server password must be specified within an ansible-vault encrypted file. 
-
-1. Create an encrypt the password file on your local machine using ansible-vault.
-2. Add a task to your pipeline that recreates the file on the agent and exports an environment variable containing the vault file password.
+The server password must be specified within an ansible-vault encrypted file, this can be done by creating the file during pipeline execution, or checking the encrypted file into source control. 
 
 ## Configuration
 
